@@ -48,7 +48,7 @@ class RegisterViewController: UIViewController {
         if let email = registerEmail.text, let password = registerPswd.text {
             Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
                 if let u = user {
-                    self.ref.child("users").childByAutoId().setValue(["username": email, "type": self.type!])
+                    self.ref.child("users").child(u.uid).setValue(["username": email, "type":self.type])
                     if self.type! == "Employer" {
                     self.performSegue(withIdentifier: "Employer", sender: self)
                     }

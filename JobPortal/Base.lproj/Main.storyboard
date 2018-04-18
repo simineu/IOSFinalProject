@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -142,7 +143,8 @@
                         <outlet property="signInBtn" destination="CO1-TT-6aZ" id="3fx-WO-Qes"/>
                         <outlet property="signInEmailText" destination="bWB-Ph-KZi" id="bdB-Oj-dhl"/>
                         <outlet property="signInPasswordText" destination="s9D-pU-z1V" id="Ug0-IG-GxS"/>
-                        <segue destination="KoA-uO-6vR" kind="show" identifier="signIN" id="S8i-ml-fIP"/>
+                        <segue destination="KoA-uO-6vR" kind="show" identifier="signedEmplyee" id="Fsj-aT-mvc"/>
+                        <segue destination="zEI-Zz-oxd" kind="show" identifier="signedEmployer" id="mRv-IN-tBb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -342,9 +344,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="WELCOME Employee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5E-LF-xOs">
-                                <rect key="frame" x="113" y="180" width="169" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="WELCOME " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5E-LF-xOs">
+                                <rect key="frame" x="116" y="55" width="89" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -360,8 +361,69 @@
                                     <action selector="logout:" destination="KoA-uO-6vR" eventType="touchUpInside" id="53v-OV-xPW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6dW-nR-2rg" customClass="RoundedButton" customModule="JobPortal" customModuleProvider="target">
+                                <rect key="frame" x="16" y="29" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.081286869943141937" green="0.72867971658706665" blue="0.77702826261520386" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="7v6-cc-8gj"/>
+                                </constraints>
+                                <color key="tintColor" red="0.081286869943141937" green="0.72867971658706665" blue="0.77702826261520386" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button" image="menu"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Posted Jobs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXm-QR-eWh">
+                                <rect key="frame" x="112" y="146" width="136" height="85"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc2-OG-lPN" customClass="RoundedButton" customModule="JobPortal" customModuleProvider="target">
+                                <rect key="frame" x="254" y="29" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.081286869943141937" green="0.72867971658706665" blue="0.77702826261520386" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="AVn-W1-PTc"/>
+                                    <constraint firstAttribute="height" constant="50" id="aL6-tz-7pQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button" image="user">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Dc2-OG-lPN" firstAttribute="top" secondItem="Q6s-CU-LXV" secondAttribute="top" constant="29" id="03U-QY-Wsg"/>
+                            <constraint firstItem="Dc2-OG-lPN" firstAttribute="leading" secondItem="c5E-LF-xOs" secondAttribute="trailing" constant="37" id="8sX-LU-3jT"/>
+                            <constraint firstItem="6dW-nR-2rg" firstAttribute="top" secondItem="Q6s-CU-LXV" secondAttribute="top" constant="26" id="KlR-il-1ew"/>
+                            <constraint firstItem="6dW-nR-2rg" firstAttribute="bottom" secondItem="c5E-LF-xOs" secondAttribute="bottom" id="Kws-Yn-ck7"/>
+                            <constraint firstItem="Dc2-OG-lPN" firstAttribute="trailing" secondItem="JP3-aS-8b1" secondAttribute="trailingMargin" constant="-12" id="LSX-lz-lhX"/>
+                            <constraint firstItem="Q6s-CU-LXV" firstAttribute="bottom" secondItem="6dW-nR-2rg" secondAttribute="bottom" constant="472" id="Wly-FC-mpk"/>
+                            <constraint firstItem="c5E-LF-xOs" firstAttribute="leading" secondItem="6dW-nR-2rg" secondAttribute="trailing" constant="34" id="WrG-0T-IXe"/>
+                            <constraint firstItem="6dW-nR-2rg" firstAttribute="leading" secondItem="Q6s-CU-LXV" secondAttribute="leading" constant="32" id="moN-X4-aU9"/>
+                            <constraint firstItem="UXm-QR-eWh" firstAttribute="top" secondItem="Dc2-OG-lPN" secondAttribute="bottom" constant="47" id="tMp-9T-Y3R"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Q6s-CU-LXV"/>
                     </view>
                 </viewController>
@@ -370,7 +432,12 @@
             <point key="canvasLocation" x="2280" y="370.77464788732397"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="menu" width="112" height="112"/>
+        <image name="user" width="119" height="105"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="J3c-M1-yTT"/>
+        <segue reference="mRv-IN-tBb"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -34,13 +34,30 @@ class ViewController: UIViewController {
 
     
     @IBAction func signInButton(_ sender: Any) {
-        
+        var type:String = ""
         if let email = signInEmailText.text, let password = signInPasswordText.text {
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                 if let u = user {
+                    
+                   
                     let userID = Auth.auth().currentUser?.uid
-                    print("USERID", userID )
-                    self.performSegue(withIdentifier: "signIN", sender: self)                }
+                    self.ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                        // Get user value
+                        let value = snapshot.value as? NSDictionary
+                        type = value?["type"] as? String ?? ""
+                        print(type);
+                        if type == "Employer" {
+                            self.performSegue(withIdentifier: "signedEmployer", sender: self)
+                        }
+                        else if type == "Employee" {
+                            self.performSegue(withIdentifier: "signedEmplyee", sender: self)
+                        }                        // ...
+                    }) { (error) in
+                        print(error.localizedDescription)
+                    }
+                    
+                    
+                }
             }
         }
         
