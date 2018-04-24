@@ -10,6 +10,8 @@
 		7F06E66020840A5E00DBE1F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F06E65F20840A5E00DBE1F0 /* GoogleService-Info.plist */; };
 		7F06E66220840F9E00DBE1F0 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F06E66120840F9E00DBE1F0 /* RegisterViewController.swift */; };
 		7F06E66420853C5E00DBE1F0 /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F06E66320853C5E00DBE1F0 /* LogoutViewController.swift */; };
+		7F1CF2A5208F92B700D8D07F /* EmployerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1CF2A4208F92B700D8D07F /* EmployerViewController.swift */; };
+		7F1CF2A9208FBEB300D8D07F /* PostJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1CF2A8208FBEB300D8D07F /* PostJobViewController.swift */; };
 		7FB2BC032086DFAC000D3A1E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2BC022086DFAC000D3A1E /* RoundedButton.swift */; };
 		7FC1FD502082C8830000ADF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC1FD4F2082C8830000ADF8 /* AppDelegate.swift */; };
 		7FC1FD522082C8830000ADF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC1FD512082C8830000ADF8 /* ViewController.swift */; };
@@ -25,6 +27,8 @@
 		7F06E65F20840A5E00DBE1F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7F06E66120840F9E00DBE1F0 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		7F06E66320853C5E00DBE1F0 /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
+		7F1CF2A4208F92B700D8D07F /* EmployerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployerViewController.swift; sourceTree = "<group>"; };
+		7F1CF2A8208FBEB300D8D07F /* PostJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostJobViewController.swift; sourceTree = "<group>"; };
 		7FB2BC022086DFAC000D3A1E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		7FC1FD4C2082C8830000ADF8 /* JobPortal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobPortal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC1FD4F2082C8830000ADF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 				7F06E65F20840A5E00DBE1F0 /* GoogleService-Info.plist */,
 				7F06E66320853C5E00DBE1F0 /* LogoutViewController.swift */,
 				7FB2BC022086DFAC000D3A1E /* RoundedButton.swift */,
+				7F1CF2A4208F92B700D8D07F /* EmployerViewController.swift */,
+				7F1CF2A8208FBEB300D8D07F /* PostJobViewController.swift */,
 			);
 			path = JobPortal;
 			sourceTree = "<group>";
@@ -220,10 +226,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F06E66220840F9E00DBE1F0 /* RegisterViewController.swift in Sources */,
+				7F1CF2A5208F92B700D8D07F /* EmployerViewController.swift in Sources */,
 				7FB2BC032086DFAC000D3A1E /* RoundedButton.swift in Sources */,
 				7FC1FD522082C8830000ADF8 /* ViewController.swift in Sources */,
 				7F06E66420853C5E00DBE1F0 /* LogoutViewController.swift in Sources */,
 				7FC1FD502082C8830000ADF8 /* AppDelegate.swift in Sources */,
+				7F1CF2A9208FBEB300D8D07F /* PostJobViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
