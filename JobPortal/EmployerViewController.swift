@@ -7,9 +7,17 @@
 //
 
 import UIKit
+import Firebase
 
 class EmployerViewController: UIViewController {
 
+    
+    @IBOutlet weak var trailing: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var leading: NSLayoutConstraint!
+    
+    var menuShowing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +32,34 @@ class EmployerViewController: UIViewController {
     }
     
 
+    @IBAction func logout(_ sender: Any) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    @IBAction func sideMenu(_ sender: Any) {
+        
+        if (menuShowing){
+            leading.constant = 0
+            trailing.constant = 0
+        }
+        else{
+            leading.constant = 120
+            trailing.constant = 120
+        }
+        
+        UIView.animate(withDuration: 0.3, animations: {self.view.layoutIfNeeded()})
+        menuShowing = !menuShowing
+        
+    }
+    
     /*
     // MARK: - Navigation
 

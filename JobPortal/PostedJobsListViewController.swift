@@ -12,11 +12,15 @@ import Firebase
 
 
 
-class PostedJobsListViewController: UITableViewController {
+class PostedJobsListViewController: UITableViewController, UISearchResultsUpdating {
      var ref:DatabaseReference?
     var databaseHandler: DatabaseHandle?
     
     var jobList = [Jobs]();
+    
+    var filteredJobs = [Jobs]();
+    
+    var searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,16 +39,20 @@ class PostedJobsListViewController: UITableViewController {
             let desc = temp!["description"] as? String ?? ""
             let jobTitle = temp!["jobTitle"] as? String ?? ""
             let department = temp!["department"] as? String ?? ""
+            let postedBy = temp!["postedBy"] as? String ?? ""
                             print(department)
             
-                            var j = Jobs(jobType: jobType, location: location, desc: desc, companyName: companyName, jobTitle: jobTitle, department: department)
+            if Auth.auth().currentUser?.uid == postedBy {
+            var j = Jobs(jobType: jobType, location: location, desc: desc, companyName: companyName, jobTitle: jobTitle, department: department, postedBy: postedBy)
             
                             self.jobList.append(j)
+            }
                             print(self.jobList.count)
                             for i in self.jobList{
                                 print(i.companyName)
                             }
                            // print(self.jobData)
+            self.filteredJobs = self.jobList
                            self.tableView.reloadData()
             
         })
@@ -82,8 +90,30 @@ class PostedJobsListViewController: UITableViewController {
         
     
         tableView.reloadData()
+        
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        tableView.tableHeaderView = searchController.searchBar
+        
+        super.viewDidLoad()
     }
 
+    func updateSearchResults(for searchController: UISearchController) {
+        tableView.reloadData()
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+            filteredJobs = jobList.filter({
+                (eachJob : Jobs) -> Bool in return
+                (eachJob.jobTitle.lowercased().contains(searchText.lowercased()))
+            })
+        }
+        else {
+            filteredJobs = jobList
+        }
+        tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -97,7 +127,7 @@ class PostedJobsListViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         
         print("Count++",jobList.count)
-        return jobList.count
+        return filteredJobs.count
     }
 
     
@@ -112,7 +142,7 @@ class PostedJobsListViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of RoomTableViewCell.")
         }
         
-        let jb = jobList[indexPath.row]
+        let jb = filteredJobs[indexPath.row]
         cell.companyNameLbl.text = String(describing: jb.companyName);
         cell.jobPositionLbl.text = String(describing: jb.jobTitle)
         // Configure the cell...

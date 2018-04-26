@@ -15,17 +15,18 @@ class Jobs: NSObject {
     var companyName : String
     var jobTitle : String
     var department : String
+    var postedBy : String
     
     
     
-    
-    init(jobType : String, location : String, desc : String, companyName : String, jobTitle : String, department : String) {
+    init(jobType : String, location : String, desc : String, companyName : String, jobTitle : String, department : String, postedBy : String) {
         self.jobType   = jobType
         self.location = location
         self.desc  = desc
         self.companyName   = companyName
         self.jobTitle = jobTitle
         self.department  = department
+        self.postedBy  = postedBy
     }
     
     

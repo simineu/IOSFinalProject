@@ -10,6 +10,15 @@ import UIKit
 
 class JobListTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var positionLbl: UILabel!
+    
+    @IBOutlet weak var locationLbl: UILabel!
+    
+    @IBOutlet weak var companyLbl: UILabel!
+    
+    
+    @IBOutlet weak var submit: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +29,9 @@ class JobListTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    
+    @IBAction func submitResumeBtn(_ sender: Any) {
+    }
+    
 }

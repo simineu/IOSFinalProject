@@ -9,8 +9,13 @@
 import UIKit
 import Firebase
 
-class LogoutViewController: UIViewController {
+class EmployeeViewController: UIViewController {
 
+    @IBOutlet weak var trailing: NSLayoutConstraint!
+    
+    @IBOutlet weak var leading: NSLayoutConstraint!
+    
+    var menuShowing = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +27,7 @@ class LogoutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
     @IBAction func logout(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {
@@ -30,6 +36,21 @@ class LogoutViewController: UIViewController {
             print ("Error signing out: %@", signOutError)
         }
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func showSideView(_ sender: Any) {
+        if (menuShowing){
+            leading.constant = 0
+            trailing.constant = 0
+        }
+        else{
+        leading.constant = 120
+        trailing.constant = 120
+        }
+        
+        UIView.animate(withDuration: 0.3, animations: {self.view.layoutIfNeeded()})
+         menuShowing = !menuShowing
     }
     
     /*
