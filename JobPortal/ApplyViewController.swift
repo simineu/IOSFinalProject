@@ -24,10 +24,12 @@ class ApplyViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBOutlet weak var resume: UIImageView!
     
-    
+    var newURL:String!
+    var URL:String!
     var x:String = "";
     var edu = ["Masters", "Bacholers", "Doctorate", "High School", "Profesional"]
     
+    var values:NSDictionary!
     @IBOutlet weak var selectFile: UIButton!
     
     
@@ -40,7 +42,7 @@ class ApplyViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         print(getJob?.jobId)
-       pickerView.delegate = self
+        pickerView.delegate = self
         pickerView.dataSource = self
         imagePickerController.delegate = self
         self.availableDatePicker.minimumDate = Date()
@@ -78,7 +80,7 @@ class ApplyViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         resume.contentMode = .scaleAspectFit
         resume.image = chosenImage
         dismiss(animated:true, completion: nil)
@@ -90,6 +92,8 @@ func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     
     
     @IBAction func applyBtn(_ sender: Any) {
+        
+        
         var reloc:String!
         if relocateSegment.selectedSegmentIndex == 0 {
             reloc = "Yes";
@@ -108,13 +112,60 @@ func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         let now = dateformatter.string(from: availableDatePicker.date)
         
         print("NAME", nameTxtField.text!);
-        self.ref.child("applications").childByAutoId().setValue(["appliedBy": uid, "applied for": jobId, "posted by": getJob?.postedBy, "education Level": x, "available from": now, "willing to relocate": reloc, "Name AppliedBy": nameTxtField.text!])
+        print(Date())
+        var x = false;
+        
+        let storage = Storage.storage()
+        let storageRef = storage.reference().child("user\(Date())")
+        
+        
+        
+        guard let uploadData = UIImagePNGRepresentation(self.resume.image!)
+            else{
+                return
+        }
+        let t = storageRef.putData(uploadData,metadata: nil)
+        storageRef.putData(uploadData,metadata: nil) {
+            metadata,error in
+            if(error != nil){
+                print(error!)
+                return
+            }else{
+                print(metadata!.downloadURL()?.absoluteString)
+                self.URL = metadata!.downloadURL()?.absoluteString
+                
+                self.newURL = self.URL!;
+                print("newURL", String(self.URL!))
+                let observer = t.observe(.progress) { snapshot in
+                    x = true
+                    print("Snapshot progress",snapshot.progress) // NSProgress object
+                }
+                if self.newURL != nil{
+                    self.values = ["appliedBy": uid!, "applied for": jobId, "posted by": self.getJob?.postedBy, "education Level": x, "available from": now, "willing to relocate": reloc, "Name AppliedBy": self.nameTxtField.text!, "resumeURL": self.URL!];
+                    
+                    self.apply(values: self.values as! [String : AnyObject]);
+                    
+                }
+                else{
+                    print("New URL is nil")
+                }
+            }
+        }
+        
+        
+        
+        
+        
+    }
+  func apply(values: [String: AnyObject]){
+        self.ref.child("applications").childByAutoId().setValue(values)
         
         let alertView = UIAlertView();
         alertView.addButton(withTitle: "OK");
         alertView.title = "Alert";
         alertView.message = "Applied Successfully";
         alertView.show();
+        _ = navigationController?.popToRootViewController(animated: true)
     }
     
 //    func uploadResume(_ image:UIImage, completion: @escaping ((_ url:String)->())){
