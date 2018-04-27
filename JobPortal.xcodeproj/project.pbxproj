@@ -18,7 +18,9 @@
 		7F1CF2B12090146F00D8D07F /* Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1CF2B02090146F00D8D07F /* Jobs.swift */; };
 		7F1CF2B320912AD200D8D07F /* JobListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1CF2B220912AD200D8D07F /* JobListTableViewCell.swift */; };
 		7F1CF2B520912EFA00D8D07F /* EmployeeJobListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1CF2B420912EFA00D8D07F /* EmployeeJobListTableViewController.swift */; };
+		7FA16B612092B0EB00E7F3D2 /* JobDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA16B602092B0EB00E7F3D2 /* JobDetailsViewController.swift */; };
 		7FB2BC032086DFAC000D3A1E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2BC022086DFAC000D3A1E /* RoundedButton.swift */; };
+		7FBA844B2092E14F00F49D3F /* JobList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBA844A2092E14F00F49D3F /* JobList.swift */; };
 		7FC1FD502082C8830000ADF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC1FD4F2082C8830000ADF8 /* AppDelegate.swift */; };
 		7FC1FD522082C8830000ADF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC1FD512082C8830000ADF8 /* ViewController.swift */; };
 		7FC1FD552082C8830000ADF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC1FD532082C8830000ADF8 /* Main.storyboard */; };
@@ -41,7 +43,9 @@
 		7F1CF2B02090146F00D8D07F /* Jobs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jobs.swift; sourceTree = "<group>"; };
 		7F1CF2B220912AD200D8D07F /* JobListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListTableViewCell.swift; sourceTree = "<group>"; };
 		7F1CF2B420912EFA00D8D07F /* EmployeeJobListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeJobListTableViewController.swift; sourceTree = "<group>"; };
+		7FA16B602092B0EB00E7F3D2 /* JobDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailsViewController.swift; sourceTree = "<group>"; };
 		7FB2BC022086DFAC000D3A1E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		7FBA844A2092E14F00F49D3F /* JobList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobList.swift; sourceTree = "<group>"; };
 		7FC1FD4C2082C8830000ADF8 /* JobPortal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobPortal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC1FD4F2082C8830000ADF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FC1FD512082C8830000ADF8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,10 +103,12 @@
 				7F1CF2A8208FBEB300D8D07F /* PostJobViewController.swift */,
 				7F1CF2AA208FF60800D8D07F /* PostedJobsListViewController.swift */,
 				7F1CF2AC209007B200D8D07F /* EmployerJobTableViewCell.swift */,
-				7F1CF2B02090146F00D8D07F /* Jobs.swift */,
 				7F1CF2B220912AD200D8D07F /* JobListTableViewCell.swift */,
 				7F1CF2B420912EFA00D8D07F /* EmployeeJobListTableViewController.swift */,
 				7F1489A020925BAF00FEA17F /* ApplyViewController.swift */,
+				7FA16B602092B0EB00E7F3D2 /* JobDetailsViewController.swift */,
+				7F1CF2B02090146F00D8D07F /* Jobs.swift */,
+				7FBA844A2092E14F00F49D3F /* JobList.swift */,
 			);
 			path = JobPortal;
 			sourceTree = "<group>";
@@ -246,6 +252,7 @@
 				7F1CF2B320912AD200D8D07F /* JobListTableViewCell.swift in Sources */,
 				7F06E66220840F9E00DBE1F0 /* RegisterViewController.swift in Sources */,
 				7F1CF2AB208FF60900D8D07F /* PostedJobsListViewController.swift in Sources */,
+				7FA16B612092B0EB00E7F3D2 /* JobDetailsViewController.swift in Sources */,
 				7F1CF2A5208F92B700D8D07F /* EmployerViewController.swift in Sources */,
 				7F1CF2AD209007B200D8D07F /* EmployerJobTableViewCell.swift in Sources */,
 				7FB2BC032086DFAC000D3A1E /* RoundedButton.swift in Sources */,
@@ -255,6 +262,7 @@
 				7F1CF2B520912EFA00D8D07F /* EmployeeJobListTableViewController.swift in Sources */,
 				7FC1FD502082C8830000ADF8 /* AppDelegate.swift in Sources */,
 				7F1CF2A9208FBEB300D8D07F /* PostJobViewController.swift in Sources */,
+				7FBA844B2092E14F00F49D3F /* JobList.swift in Sources */,
 				7F1489A120925BAF00FEA17F /* ApplyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

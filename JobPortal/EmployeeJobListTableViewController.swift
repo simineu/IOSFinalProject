@@ -15,8 +15,9 @@ class EmployeeJobListTableViewController: UITableViewController, UISearchResults
     var ref:DatabaseReference?
     var databaseHandler: DatabaseHandle?
     
-    var jobList = [Jobs]();
-    var filteredJobs = [Jobs]();
+    var jobList = [JobList]();
+    var filteredJobs = [JobList]();
+    
     
     var searchController = UISearchController(searchResultsController: nil)
     
@@ -29,7 +30,7 @@ class EmployeeJobListTableViewController: UITableViewController, UISearchResults
         
         databaseHandler = ref?.child("jobs").observe(.childAdded, with: { (snapshot) in
             let temp = snapshot.value as? NSDictionary
-            
+            let jobId = snapshot.key
             let companyName = temp!["companyName"] as? String ?? ""
             let jobType = temp!["jobType"] as? String ?? ""
             let location = temp!["location"] as? String ?? ""
@@ -39,7 +40,7 @@ class EmployeeJobListTableViewController: UITableViewController, UISearchResults
             let postedBy = temp!["postedBy"] as? String ?? ""
             print(department)
             
-            var j = Jobs(jobType: jobType, location: location, desc: desc, companyName: companyName, jobTitle: jobTitle, department: department, postedBy: postedBy)
+            let j = JobList(jobType: jobType, location: location, desc: desc, companyName: companyName, jobTitle: jobTitle, department: department, postedBy: postedBy, jobId: jobId)
             
             self.jobList.append(j)
             print(self.jobList.count)
@@ -71,7 +72,7 @@ class EmployeeJobListTableViewController: UITableViewController, UISearchResults
         tableView.reloadData()
         if let searchText = searchController.searchBar.text, !searchText.isEmpty {
             filteredJobs = jobList.filter({
-                (eachJob : Jobs) -> Bool in return
+                (eachJob : JobList) -> Bool in return
                 (eachJob.jobTitle.lowercased().contains(searchText.lowercased()))
             })
         }
@@ -115,12 +116,35 @@ class EmployeeJobListTableViewController: UITableViewController, UISearchResults
         cell.companyLbl.text = String(describing: jb.companyName);
         cell.positionLbl.text = String(describing: jb.jobTitle)
         cell.locationLbl.text = String(describing: jb.location)
+        
+        
         // Configure the cell...
         
         return cell
     }
  
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //performSegue(withIdentifier: "segue", sender: self)
+        
+        self.performSegue(withIdentifier: "jobDetails", sender: nil)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "jobDetails" {
+            
+            let indexPath = tableView.indexPathForSelectedRow
+            let jobData = filteredJobs[(indexPath?.row)!]
+            let jobDetailsViewController = segue.destination as! JobDetailsViewController
+            jobDetailsViewController.getJob = jobData
+        }
+    }
 
+    
+    
+    
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -165,5 +189,8 @@ class EmployeeJobListTableViewController: UITableViewController, UISearchResults
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    
 
 }

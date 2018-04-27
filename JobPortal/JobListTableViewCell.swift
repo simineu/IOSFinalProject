@@ -18,9 +18,11 @@ class JobListTableViewCell: UITableViewCell {
     @IBOutlet weak var companyLbl: UILabel!
     
     
-    @IBOutlet weak var submit: UIButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        //submit.titleLabel =
         // Initialization code
     }
 
@@ -31,7 +33,8 @@ class JobListTableViewCell: UITableViewCell {
     }
     
     
-    @IBAction func submitResumeBtn(_ sender: Any) {
-    }
+    
+    
+    
     
 }
