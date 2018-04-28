@@ -10,16 +10,34 @@ import UIKit
 import Firebase
 
 class EmployeeViewController: UIViewController {
-
+    var ref:DatabaseReference?
+    var databaseHandler: DatabaseHandle?
     @IBOutlet weak var trailing: NSLayoutConstraint!
     
     @IBOutlet weak var leading: NSLayoutConstraint!
     
+    
+    @IBOutlet weak var applicationLabel: UILabel!
+    
     var menuShowing = false
+    var count = 0;
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        ref = Database.database().reference();
+        
+        
         // Do any additional setup after loading the view.
+        
+        databaseHandler = ref?.child("jobs").observe(.childAdded, with: { (snapshot) in
+            let temp = snapshot.value as? NSDictionary
+        
+            self.count = self.count + 1;
+            
+            
+            
+        })
+        // Do any additional setup after loading the view.
+        applicationLabel.text = String(count)
     }
 
     override func didReceiveMemoryWarning() {

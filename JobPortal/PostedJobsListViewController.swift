@@ -16,9 +16,9 @@ class PostedJobsListViewController: UITableViewController, UISearchResultsUpdati
      var ref:DatabaseReference?
     var databaseHandler: DatabaseHandle?
     
-    var jobList = [Jobs]();
+    var jobList = [JobList]();
     
-    var filteredJobs = [Jobs]();
+    var filteredJobs = [JobList]();
     
     var searchController = UISearchController(searchResultsController: nil)
     
@@ -28,11 +28,12 @@ class PostedJobsListViewController: UITableViewController, UISearchResultsUpdati
 
         ref = Database.database().reference();
         
+        
         // Do any additional setup after loading the view.
         
         databaseHandler = ref?.child("jobs").observe(.childAdded, with: { (snapshot) in
                 let temp = snapshot.value as? NSDictionary
-            
+            let jobId = snapshot.key
             let companyName = temp!["companyName"] as? String ?? ""
             let jobType = temp!["jobType"] as? String ?? ""
             let location = temp!["location"] as? String ?? ""
@@ -42,8 +43,9 @@ class PostedJobsListViewController: UITableViewController, UISearchResultsUpdati
             let postedBy = temp!["postedBy"] as? String ?? ""
                             print(department)
             
+            
             if Auth.auth().currentUser?.uid == postedBy {
-            var j = Jobs(jobType: jobType, location: location, desc: desc, companyName: companyName, jobTitle: jobTitle, department: department, postedBy: postedBy)
+                var j = JobList(jobType: jobType, location: location, desc: desc, companyName: companyName, jobTitle: jobTitle, department: department, postedBy: postedBy, jobId: jobId)
             
                             self.jobList.append(j)
             }
@@ -54,7 +56,7 @@ class PostedJobsListViewController: UITableViewController, UISearchResultsUpdati
                            // print(self.jobData)
             self.filteredJobs = self.jobList
                            self.tableView.reloadData()
-            
+
         })
         
 //        databaseHandler = ref?.child("jobs").observe(.childAdded, with: { (snapshot) in
@@ -98,13 +100,41 @@ class PostedJobsListViewController: UITableViewController, UISearchResultsUpdati
         tableView.tableHeaderView = searchController.searchBar
         
         super.viewDidLoad()
+        
+        tableView.allowsMultipleSelectionDuringEditing = true;
     }
 
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true;
+    }
+    
+   
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        let t = filteredJobs[indexPath.row].jobId
+        Database.database().reference().child("jobs").child(t).removeValue(completionBlock: { (error, refer) in
+            if error != nil {
+                print(error)
+            } else {
+                self.filteredJobs.remove(at: indexPath.row)
+                self.jobList.remove(at: indexPath.row)
+                self.tableView.reloadData()
+                print("Filtered and list",self.filteredJobs.count, self.jobList.count)
+            }
+            
+        tableView.reloadData()
+    })
+    }
+    
+//    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle:UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        print(indexPath.row)
+//    }
+    
     func updateSearchResults(for searchController: UISearchController) {
         tableView.reloadData()
         if let searchText = searchController.searchBar.text, !searchText.isEmpty {
             filteredJobs = jobList.filter({
-                (eachJob : Jobs) -> Bool in return
+                (eachJob : JobList) -> Bool in return
                 (eachJob.jobTitle.lowercased().contains(searchText.lowercased()))
             })
         }
@@ -150,6 +180,22 @@ class PostedJobsListViewController: UITableViewController, UISearchResultsUpdati
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //performSegue(withIdentifier: "segue", sender: self)
+        
+        self.performSegue(withIdentifier: "postedJobDetails", sender: nil)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "postedJobDetails" {
+            
+            let indexPath = tableView.indexPathForSelectedRow
+            let jobData = filteredJobs[(indexPath?.row)!]
+            let postedJobDetailsViewController = segue.destination as! PostedJobDetailsViewController
+            postedJobDetailsViewController.getJob = jobData
+        }
+    }
     /*
     // MARK: - Navigation
 

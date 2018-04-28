@@ -107,13 +107,13 @@ func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
         let dateformatter = DateFormatter()
         
-        dateformatter.dateFormat = "MM-DD-YYYY"
+        dateformatter.dateFormat = "yyyy/MMM/dd "
         
         let now = dateformatter.string(from: availableDatePicker.date)
         
         print("NAME", nameTxtField.text!);
         print(Date())
-        var x = false;
+        
         
         let storage = Storage.storage()
         let storageRef = storage.reference().child("user\(Date())")
@@ -137,11 +137,11 @@ func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
                 self.newURL = self.URL!;
                 print("newURL", String(self.URL!))
                 let observer = t.observe(.progress) { snapshot in
-                    x = true
+                  
                     print("Snapshot progress",snapshot.progress) // NSProgress object
                 }
                 if self.newURL != nil{
-                    self.values = ["appliedBy": uid!, "applied for": jobId, "posted by": self.getJob?.postedBy, "education Level": x, "available from": now, "willing to relocate": reloc, "Name AppliedBy": self.nameTxtField.text!, "resumeURL": self.URL!];
+                    self.values = ["appliedBy": uid!, "applied for": jobId, "posted by": self.getJob?.postedBy, "education Level": self.x, "available from": now, "willing to relocate": reloc, "Name AppliedBy": self.nameTxtField.text!, "resumeURL": self.URL!, "position": self.getJob?.jobTitle];
                     
                     self.apply(values: self.values as! [String : AnyObject]);
                     
